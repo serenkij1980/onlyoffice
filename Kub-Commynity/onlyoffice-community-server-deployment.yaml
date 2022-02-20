@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.groups.yml
+    kompose.version: 1.26.1 (a9d05d509)  
+  labels:
+    io.kompose.service: onlyoffice-community-server
+  name: onlyoffice-community-server 
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      io.kompose.service: onlyoffice-community-server
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.groups.yml
+        kompose.version: 1.26.1 (a9d05d509)      
+      labels:
+        io.kompose.network/onlyoffice: "true"
+        io.kompose.service: onlyoffice-community-server
+    spec:
+      containers:
+        - env:
+            - name: CONTROL_PANEL_PORT_80_TCP
+              value: "80"
+            - name: CONTROL_PANEL_PORT_80_TCP_ADDR
+              value: onlyoffice-control-panel
+            - name: MYSQL_SERVER_DB_NAME
+              value: onlyoffice
+            - name: MYSQL_SERVER_HOST
+              value: onlyoffice-mysql-server
+            - name: MYSQL_SERVER_PASS
+              value: onlyoffice_pass
+            - name: MYSQL_SERVER_ROOT_PASSWORD
+              value: my-secret-pw
+            - name: MYSQL_SERVER_USER
+              value: onlyoffice_user
+            - name: ONLYOFFICE_CORE_MACHINEKEY
+              value: core_secret
+          image: onlyoffice/communityserver:latest
+          name: onlyoffice-community-server          
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+            - containerPort: 5222
+          resources: {}            
+          securityContext:
+            privileged: true
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /var/www/onlyoffice/Data
+              name: community-data
+            - mountPath: /var/log/onlyoffice
+              name: community-log
+            - mountPath: /sys/fs/cgroup
+              name: onlyoffice-community-server-claim3        
+      restartPolicy: Always
+      volumes:
+        - name: community-data
+          persistentVolumeClaim:
+            claimName: community-data
+        - name: community-log
+          persistentVolumeClaim:
+            claimName: community-log
+        - name: onlyoffice-community-server-claim3
+          persistentVolumeClaim:
+            claimName: onlyoffice-community-server-claim3
+            readOnly: false
+        - name: onlyoffice-community-server-claim4
+          persistentVolumeClaim:
+            claimName: onlyoffice-community-server-claim4     
+status: {}

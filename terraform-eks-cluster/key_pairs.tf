@@ -1,0 +1,7 @@
+resource "aws_key_pair" "onlyoffice" {
+    key_name = "onlyoffice"
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCp9KNM8C1jSp8Wd7ThDQYlSR9/RkQONsJRrx90h+kl6jukNShKORIIPtTnpTycrN2XJjshexuJhIH0pn9qlkrsI4X6RD4fNsWChhyanTtbFe2nkAKPcyCKDo5BwqmqBDZMsvnjfXjcIxcx4IxIFu3lfDRdpaUsDH3dPBHBjD+XSjBgCd/VaCO+4JxrYpnYsZH8Cobkwr5heDR8T9aEMe3NsnGFMibVBZNcS7w4Uq7FiX5sUVj4JKwIPNQGoA7kGb1b2SrvLUfSIUmThwtM8c30JaSGa97JaA+d6jU1UOh7cSFDwWMc0oV4OcoytTRQHkS+hOpkk0OHfpKtsQwV0L23rDA+5fz0h6tfDqKd3PZs/cHFNA582wf8XcGimwXVxLs6ZZS6FzpCe2/4a10VYIQUnoyPJOIaVFchmz2aL4b3ic0BtmXuUCzP5L4zs2rYdzp1hC70wVWi+iveU4w75VtVmtgBq5GEg63KcC2XJK6hIIFDoQXgjILseMrDDZwr2KFMLKZghRZ55Jn4g09qp6OalqUQ7OO5pqpXyQ+0yydSFf21r+jf1m/cRcfSNMeZptHx8iiCegpAcjfk+B19sCNn1U5R9wY8PJyBflsh8B40KsXQ7eFdiFWsT9DhKCMxNCy2Kp253G0O3anuCj0el92UqFUtOQVyykEAiNevQ3MTbw== canislupus@debian"
+    tags = {
+        "Name" = "onlyoffice_key"
+    }
+}

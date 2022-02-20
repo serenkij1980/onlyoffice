@@ -1,0 +1,20 @@
+---
+apiVersion: eksctl.io/v2
+kind: ClusterConfig
+metadata:
+  name: onlyoffice-eks-H7azuqae
+  region: eu-central-1
+  version: "1.20"
+availabilityZones:
+- eu-central-1a
+- eu-central-1b
+- eu-central-1c
+managedNodeGroups:
+- name: general
+  labels:
+    role: general
+  instanceType: t3.medium
+  minSize: 2
+  maxSize: 10
+  desiredCapacity: 2
+  volumeSize: 20

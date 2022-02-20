@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:  
+  labels:
+    io.kompose.service: onlyoffice-community-server-claim3
+  name: onlyoffice-community-server-claim3
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
